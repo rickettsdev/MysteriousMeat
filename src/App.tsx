@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom'
-import logo from './logo.svg';
 import './App.css';
 import { Index, Error } from './Pages';
 import { Product } from './pages/ProductPage';
@@ -11,10 +10,10 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Routes>
-        <Route path="/"  element={<Index />}/>
-        <Route path="/rooms/:value" element={<Product />}/>
-        <Route path="/404" element={<Error />} />
-        <Route path="*" element={<Navigate replace to="/404" />} />
+          <Route path="/"  element={<Index />}/>
+          <Route path="/products/:value" element={<Product />}/>
+          <Route path="/404" element={<Error />} />
+          <Route path="*" element={<Navigate replace to="/404" />} />
         </Routes>
       </BrowserRouter>
     );
