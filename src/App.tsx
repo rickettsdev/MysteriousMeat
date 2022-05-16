@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
-import { Index, Product } from './Pages';
+import { Index, Product, Error } from './Pages';
 
 function App() {
   
@@ -11,6 +11,8 @@ function App() {
       <Routes>
       <Route path="/"  element={<Index />}/>
       <Route path="/rooms/new" element={<Product />}/>
+      <Route path="/404" element={<Error />} />
+      <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>
     </BrowserRouter>
   );
