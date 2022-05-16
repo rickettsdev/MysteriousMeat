@@ -1,38 +1,28 @@
 import { useParams } from 'react-router-dom';
+import { useState } from 'react'
+import { productFetcher } from '../api/productFetcher';
 import ProductModel from "../models/ProductModel";
 
 export const Product = () => {
-    let dataMap = new Map<string,ProductModel>([
-        [
-            "firstPlant", {
-                description: "firstPlant description",
-                notes:
-                 [{
-                     count: 0,
-                     note: ""
-
-                 }]
-            } as ProductModel
-        ],
-        [
-            "secondPlant", {
-                description: "secondPlant description",
-                notes:
-                 [{
-                     count: 1,
-                     note: ""
-
-                 }]
-            } as ProductModel
-        ]
-    ])
     const { value } = useParams();
-    var content = "not categorized"
+    const [productState, setProductState] = useState<ProductModel>()
     if (value !== null) {
-        content = dataMap.get(value ?? "not categorized")?.description ?? "not categorized"
+        let response = productFetcher(value as string, {}).then((model) => {
+            setProductState(model)
+        }).catch(error => console.log(error))
+    }
+
+    const productNotes = []
+    const productStateNotes = productState?.notes ?? []
+
+    for(var model of productStateNotes) {
+        productNotes.push(<li key = {model.note}> {model.note}</li>)
     }
 
     return (
-        <h1>Product Page {content}</h1>
+        <div>
+            <h1>Product Page {productState?.description}</h1>
+            <ul>{productNotes}</ul>
+        </div>
     );
 }
