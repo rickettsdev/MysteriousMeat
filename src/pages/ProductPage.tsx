@@ -3,11 +3,14 @@ import { useState } from 'react'
 import { productFetcher } from '../api/productFetcher';
 import ProductModel from "../models/ProductModel";
 
+var modelSet = false
+
 export const Product = () => {
     const { value } = useParams();
     const [productState, setProductState] = useState<ProductModel>()
-    if (value !== null) {
-        let response = productFetcher(value as string, {}).then((model) => {
+    if (value !== null && !modelSet) {
+        productFetcher(value as string, {}).then((model) => {
+            modelSet = true
             setProductState(model)
         }).catch(error => console.log(error))
     }

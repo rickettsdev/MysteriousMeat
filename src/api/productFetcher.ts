@@ -1,8 +1,10 @@
 import ProductModel from "../models/ProductModel"
+import PageDataResponse from "./model/PageDataResponse"
 
 type ProductCode = string
 
-let host = ""
+let host = "https://s3.us-east-2.amazonaws.com/mysteriousmeat.data"
+let pageDataFileName = "pageData.json"
 
 let productMap = new Map<ProductCode,ProductModel>([
     [
@@ -36,19 +38,15 @@ export async function productFetcher(productCode: ProductCode, headers: HeadersI
             resolve(productMap.get(productCode ?? "") ?? {} as ProductModel)
         } )
     }
-    else {
-        return new Promise<ProductModel>((resolve, reject) => {
-            reject()
-        })
-    }
 
-    //  const response = await fetch(host, {method: 'GET', headers: headers})
-    //                      .then(response => response.json())
-    //                      .catch(error => console.log(error))
-   
-    //    let responseModel = JSON.parse(response) as ProductModel
-    //    console.log(responseModel)
-    //    return new Promise<ProductModel>((resolve, reject) => {
-    //      resolve(responseModel)
-    //    })
+    const productRequestUrl = host + `/${productCode}/${pageDataFileName}`
+
+    const response = await fetch(productRequestUrl, {method: 'GET', headers: headers})
+                         .then(response => response.json())
+                         .catch(error => console.log(error))
+
+    console.log(JSON.stringify(response.pageData))
+    return new Promise<ProductModel>((resolve, reject) => {
+        resolve(response.pageData)
+    })
  }
