@@ -6,7 +6,7 @@ import { getTableContent } from '../table/ProductTable';
 
 var modelSet = false
 
-export const Product = () => {
+export const ProductPage = () => {
     const { value } = useParams();
     const [productState, setProductState] = useState<ProductModel>()
     if (value !== null && !modelSet) {
