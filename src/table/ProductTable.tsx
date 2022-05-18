@@ -2,12 +2,16 @@ import NoteModel from "../models/NoteModel";
 import ProductModel from "../models/ProductModel";
 
 export const getTableContent = (arr: ProductModel) => {
-    const iterateItem = (item: [NoteModel]) => {
-       return item.map(function (nextItem, j) {
+    const iterateNotes = (notes: Array<NoteModel>) => {
+       return notes.sort((noteA, noteB) => { 
+           let firstDate = new Date(noteA.count)
+           let secondDate = new Date(noteB.count)
+           return secondDate.getTime() - firstDate.getTime()
+        }).map(function (nextNote, j) {
          return (
-            <tr key={nextItem.count ?? "Undefined"}>
-               <td>{nextItem.count ?? "Undefined"}</td>
-               <td>{nextItem.note}</td>
+            <tr key={nextNote.count ?? "Undefined"}>
+               <td>{nextNote.count ?? "Undefined"}</td>
+               <td>{nextNote.note}</td>
             </tr>
          );
        })
@@ -21,7 +25,7 @@ export const getTableContent = (arr: ProductModel) => {
             </tr>
             </thead>
             <tbody>
-                {iterateItem(arr.notes)}
+                {iterateNotes(arr.notes)}
             </tbody>
         </table>
     );

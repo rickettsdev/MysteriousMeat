@@ -1,3 +1,4 @@
+import NoteModel from "../models/NoteModel"
 import ProductModel from "../models/ProductModel"
 
 type ProductCode = string
@@ -20,12 +21,15 @@ let productMap = new Map<ProductCode,ProductModel>([
     [
         "secondPlant", {
             description: "secondPlant description",
-            notes:
-             [{
-                 count: "2021-05-18T15:27:21.202Z",
-                 note: "Planted a while ago."
-
-             }]
+            notes: [ {
+                count: "2021-05-18T15:27:21.202Z",
+                note: "Planted first."
+            
+            }, {
+                count: "2022-05-18T15:27:21.202Z",
+                note: "Planted last."
+            
+            }] as Array<NoteModel>
         } as ProductModel
     ]
 ])
