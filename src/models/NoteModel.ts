@@ -1,4 +1,4 @@
 export default interface NoteModel {
-    count: number,
+    count: string,
     note: string
 }

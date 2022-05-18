@@ -1,5 +1,4 @@
 import ProductModel from "../models/ProductModel"
-import PageDataResponse from "./model/PageDataResponse"
 
 type ProductCode = string
 
@@ -12,7 +11,7 @@ let productMap = new Map<ProductCode,ProductModel>([
             description: "firstPlant description",
             notes:
              [{
-                 count: 0,
+                 count: "2022-05-18T15:27:21.202Z",
                  note: "Planted first."
 
              }]
@@ -23,7 +22,7 @@ let productMap = new Map<ProductCode,ProductModel>([
             description: "secondPlant description",
             notes:
              [{
-                 count: 0,
+                 count: "2021-05-18T15:27:21.202Z",
                  note: "Planted a while ago."
 
              }]

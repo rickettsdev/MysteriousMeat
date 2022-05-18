@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react'
 import { productFetcher } from '../api/productFetcher';
 import ProductModel from "../models/ProductModel";
+import { getTableContent } from '../table/ProductTable';
 
 var modelSet = false
 
@@ -15,17 +16,16 @@ export const Product = () => {
         }).catch(error => console.log(error))
     }
 
-    const productNotes = []
-    const productStateNotes = productState?.notes ?? []
+    var tableContent = <div></div>
 
-    for(var model of productStateNotes) {
-        productNotes.push(<li key = {model.note}> {model.note}</li>)
+    if (productState?.description != null) {
+        tableContent = getTableContent(productState)
     }
-
+    
     return (
         <div>
             <h1>Product Page {productState?.description}</h1>
-            <ul>{productNotes}</ul>
+            <div>{tableContent}</div>
         </div>
     );
 }
