@@ -14,11 +14,13 @@ export const getTableContent = (arr: ProductModel) => {
     }
     return (
         <table key={arr.description}>
+            <thead>
+            <tr key="columnHeaders">
+                <td>TimeStamp</td>
+                <td>Note</td>
+            </tr>
+            </thead>
             <tbody>
-                <tr key="columnHeaders">
-                    <td>TimeStamp</td>
-                    <td>Note</td>
-                </tr>
                 {iterateItem(arr.notes)}
             </tbody>
         </table>

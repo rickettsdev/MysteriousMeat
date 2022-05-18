@@ -24,7 +24,7 @@ export const Product = () => {
     
     return (
         <div>
-            <h1>Product Page {productState?.description}</h1>
+            <h2>{productState?.description}</h2>
             <div>{tableContent}</div>
         </div>
     );
